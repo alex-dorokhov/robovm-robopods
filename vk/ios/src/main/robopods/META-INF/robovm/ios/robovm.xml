@@ -1,0 +1,20 @@
+<config>
+    <frameworks>
+        <framework>VKSdkFramework</framework>
+
+        <framework>Foundation</framework>
+        <framework>UIKit</framework>
+        <framework>SafariServices</framework>
+        <framework>CoreGraphics</framework>
+        <framework>Security</framework>
+    </frameworks>
+    <weakFrameworks>
+        <framework>SafariServices</framework>
+    </weakFrameworks>
+    <forceLinkClasses>
+        <pattern>org.robovm.pods.vk.VKSdk</pattern>
+    </forceLinkClasses>
+    <exportedSymbols>
+        <symbol>VK*</symbol>
+    </exportedSymbols>
+</config>

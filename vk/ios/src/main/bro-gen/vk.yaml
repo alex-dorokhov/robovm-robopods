@@ -1,0 +1,178 @@
+package: org.robovm.pods.vk
+framework: VKSdk
+include: [foundation, uikit, coregraphics, security, dispatch]
+clang_args: ['-x', 'objective-c']
+headers: [VKSdkFramework.h, VKApi.h, VKAccessToken.h, VKError.h, VKSdk.h, 'NSError+VKError.h']
+
+typedefs:
+    'void (^)(NSArray *)': '@Block VoidBlock1<NSArray<NSObject>>'
+    'void (^)(NSError *)': '@Block VoidBlock1<NSError>'
+    'void (^)(NSUInteger, NSUInteger)': '@Block VoidBlock2<Long, Long>'
+    'void (^)(VKResponse *)': '@Block VoidBlock1<VKResponse>'
+    'void (^)(VKProgressType, long long, long long)': '@Block VoidBlock3<VKProgressType, Long, Long>'
+    'void (^)(VKAuthorizationState, NSError *)': '@Block VoidBlock2<VKAuthorizationState, NSError>'
+    int: int
+    bool: boolean
+    dispatch_queue_t: DispatchQueue
+
+private_typedefs:
+    ApiObjectType: VKApiObject
+    ModelClass: VKApiObject
+
+enums:
+    VKProgressType: {}
+    VKAuthorizationState: {}
+    VKAuthorizationOptions: {}
+    VKImageType: {}
+
+protocols:
+    VKSdkUIDelegate:
+        methods:
+            '-vkSdk([^:]+).*':
+                name: 'on#{g[0]}'
+    VKSdkDelegate:
+        methods:
+            '-vkSdk([^:]+).*':
+                name: 'on#{g[0]}'
+
+categories:
+    VKError@NSError:
+        methods:
+            '.+':
+                trim_after_first_colon: true
+
+classes:
+    VKObject: {}
+    VKApiObject: {}
+    VKApiObjectArray:
+        methods:
+            '-firstObject.*':
+                return_type: T
+            '-lastObject.*':
+                return_type: T
+            '-objectAtIndex.*':
+                trim_after_first_colon: true
+                return_type: T
+            '.+':
+                trim_after_first_colon: true
+    VKAudio: {}
+    VKAudios:
+        extends: VKApiObjectArray<VKAudio>
+    VKCounters: {}
+    VKPhotoSize: {}
+    VKPhotoSizes:
+        extends: VKApiObjectArray<VKPhotoSize>
+        methods:
+            '.+':
+                trim_after_first_colon: true
+    VKPhoto: {}
+    VKPhotoArray:
+        extends: VKApiObjectArray<VKPhoto>
+    VKSchool: {}
+    VKSchools:
+        extends: VKApiObjectArray<VKSchool>
+    VKUniversity: {}
+    VKUniversities:
+        extends: VKApiObjectArray<VKUniversity>
+    VKRelative: {}
+    VKRelativities:
+        extends: VKApiObjectArray<VKRelative>
+    VKGeoObject: {}
+    VKCity: {}
+    VKCountry: {}
+    VKPersonal: {}
+    VKLastSeen: {}
+    VKExports: {}
+    VKUser: {}
+    VKUsersArray:
+        extends: VKApiObjectArray<VKUser>
+    VKAccessToken:
+        protocols: [NSCoding]
+        extends: VKObject
+        methods:
+            '.+':
+                trim_after_first_colon: true
+    VKError: {}
+    VKRequest:
+        methods:
+            '+requestWithMethod:and.+': # deprecated
+                exclude: true
+            '.+':
+                trim_after_first_colon: true
+
+    VKResponse:
+        properties:
+            parsedModel:
+                type: T
+    VKRequestTiming: {}
+    VKSdk:
+        methods:
+            '+processOpenURL.+':
+                name: processOpenURL
+            '+authorize.*':
+                trim_after_first_colon: true
+                parameters:
+                    permissions:
+                        type: List<String>
+                        marshaler: NSArray.AsStringListMarshaler
+            '+wakeUpSession.*':
+                trim_after_first_colon: true
+                parameters:
+                    permissions:
+                        type: List<String>
+                        marshaler: NSArray.AsStringListMarshaler
+            '.+':
+                trim_after_first_colon: true
+
+    VKAuthorizationResult:
+        methods:
+            '.+':
+                trim_after_first_colon: true
+    VKApiBase:
+        methods:
+            '.+':
+                trim_after_first_colon: true
+    VKApi:
+        methods:
+            '.+':
+                trim_after_first_colon: true
+    VKApi(Users|Wall|Photos|Friends|Groups):
+        methods:
+            '.+':
+                trim_after_first_colon: true
+                parameters:
+                    params:
+                        type: Map<String, String>
+                        marshaler: NSDictionary.AsStringStringMapMarshaler
+    VKImageParameters:
+        methods:
+            '.+':
+                trim_after_first_colon: true
+    VKCaptchaViewController:
+        methods:
+            '.+':
+                trim_after_first_colon: true
+                
+values:
+    'VK_API_ERROR':
+        exclude: true
+    'VK_API_CANCELED':
+        exclude: true
+    'VK_API_REQUEST_NOT_PREPARED':
+        exclude: true
+    'VK_RESPONSE_STRING_PARSING_ERROR':
+        exclude: true
+    'VK_AUTHORIZE_CONTROLLER_CANCEL':
+        exclude: true
+     # Make sure we don't miss any constants if new ones are introduced in a later version
+    'VK_API_(.+)':
+        name: '#{g[0]}'
+        class: VKApiConst
+    'VK_.+':
+        class: VKConstants
+
+constants:
+    # Make sure we don't miss any constants if new ones are introduced in a later version
+    'VK_.+':
+        class: VKConstants
+

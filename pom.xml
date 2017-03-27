@@ -190,5 +190,6 @@
         <module>heyzap</module>
         <module>parse</module>
         <module>reachability</module>
+        <module>vk</module>
     </modules>
 </project>
