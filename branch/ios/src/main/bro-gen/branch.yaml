@@ -1,0 +1,77 @@
+package: org.robovm.pods.branch
+framework: Branch
+include: [foundation, corelocation, uikit]
+clang_args: ['-x', 'objective-c']
+headers: [Branch.h, BranchLinkProperties.h]
+typedefs:
+    'void (^)(NSDictionary *, NSError *)': '@Block VoidBlock2<NSDictionary<?, ?>, NSError>'
+    'callbackWithParams': '@Block VoidBlock2<NSDictionary<?, ?>, NSError>'
+    'callbackWithUrl': '@Block VoidBlock2<NSString, NSError>'
+    'callbackWithStatus': '@Block VoidBlock2<Boolean, NSError>'
+    'callbackWithList': '@Block VoidBlock2<NSArray<?>, NSError>'
+    'callbackWithUrlAndSpotlightIdentifier': '@Block VoidBlock3<NSString, NSString, NSError>'
+    'callbackWithBranchUniversalObject': '@Block VoidBlock3<BranchUniversalObject, BranchLinkProperties, NSError>'
+    'shareCompletion': '@Block VoidBlock2<NSString, Boolean>'
+    'shareCompletionWithError': '@Block VoidBlock3<NSString, Boolean, NSError>'
+
+enums:
+    BranchCreditHistoryOrder: {}
+    ContentIndexMode: {}
+    BranchLinkType: {}
+        
+classes:    
+    Branch:
+        methods:
+            '+.*': 
+                trim_after_first_colon: true
+            '-initSessionWithLaunchOptions.*:automaticallyDisplayDeepLinkController:.*':
+                name: initSessionAndAutomaticallyDisplayDeepLinkController
+            '-initWithInterface:.*':
+                exclude: true
+            '-initSessionWithLaunchOptions:.*':
+                name: initSession
+            '-.*':
+                trim_after_first_colon: true
+    BranchLinkProperties:
+        properties:
+            '.+': {}
+        methods:
+            '-withValue:.*':
+                trim_after_first_colon: true
+            '+getBranchLinkPropertiesFromDictionary:.*':
+                trim_after_first_colon: true
+            '-addControlParam:.*':
+                trim_after_first_colon: true
+    BranchUniversalObject:
+        properties:
+            '.+': {}
+        methods:
+            '+.*':
+                trim_after_first_colon: true
+            '-initWithTitle:':
+                exclude: true
+            '-.*': 
+                trim_after_first_colon: true
+        
+    BranchActivityItemProvider:
+        methods:
+            '+.*': 
+                trim_after_first_colon: true
+            '-.*': 
+                trim_after_first_colon: true
+
+    BranchShareLink: 
+        properties:
+            '.+': {}
+        methods:
+            '+.*': 
+                trim_after_first_colon: true
+            '-.*': 
+                trim_after_first_colon: true
+    BNCProduct: {}
+    BNCCommerceEvent: {}
+protocols:
+    BranchShareLinkDelegate: {}
+    BranchActivityItemProviderDelegate: {}
+
+

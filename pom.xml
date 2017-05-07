@@ -178,6 +178,7 @@
 
         <module>appmetrica</module>
         <module>bolts</module>
+        <module>branch</module>
         <module>chartboost</module>
         <module>fabric</module>
         <module>facebook</module>
