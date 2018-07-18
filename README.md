@@ -13,7 +13,7 @@ Add the dependencies to your project and start coding without thinking about pla
 
 A RoboPod comes in form of a simple JAR file published to Maven Central so you can easily 
 integrate it with Maven or Gradle.
-Just add a depencency to your Maven or Gradle build files and you are ready to go!
+Add a depencency to your Maven or Gradle build files, download native frameworks, define frameworks in robovm.xml and you are ready to go!
 
 ### Versioning
 
@@ -26,7 +26,7 @@ In your project's root `build.gradle` file add the following at the top of the `
 
 ```gradle
 buildscript {
-   project.ext.robopodsVersion = "2.2.1"
+   project.ext.robopodsVersion = "2.2.2"
 }
 ```
 
@@ -45,7 +45,7 @@ In your project's root `pom.xml` file add the following property:
 
 ```maven
 <properties>
-   <robopods.version>2.2.1</robopods.version>
+   <robopods.version>2.2.2</robopods.version>
 </properties>
 ```
 
@@ -59,6 +59,34 @@ When you add a dependency, you can refer to the variable like this:
 </dependency>
 ```
 
+#### Add native frameworks
+
+Native frameworks can be embedded in the Robopod jars, but often need to be added manually. A robopod jar has embedded its native frameworks if in path `META-INF/robovm/ios/libs/` `.framework` or `.a` files are present.
+
+If natives are not present, you need to add them manually. Download the native frameworks, add them to the project and update robovm.xml.
+
+Below an example if you'd like to use the Facebook SDK Share dialog.
+
+Download the iOS SDK from [https://developers.facebook.com/docs/ios/downloads](https://developers.facebook.com/docs/ios/downloads)
+
+Copy the Bolts.framework, FBSDKCoreKit.framework and FBSDKShareKit.framework
+into ./lib (relative to robovm.xml)
+
+Add to robovm.xml:
+    
+    <frameworkPaths>
+        <path>lib</path>
+    </frameworkPaths>
+    
+    
+    <frameworks>
+        ...
+        <framework>Bolts</framework>
+        <framework>FBSDKCoreKit</framework>
+        <framework>FBSDKShareKit</framework>
+        ...
+    </frameworks>
+
 #### Current versions
 
 The RoboPods follow the same versioning as the core of RoboVM. 
@@ -66,11 +94,11 @@ To prevent compatibility issues make sure that you use the same version for the 
 
 The current stable version is:
 
-> 2.2.1
+> 2.2.2
 
 If you want to use the latest and greatest of every RoboPod, use the latest snapshot version for your dependencies:
 
-> 2.2.2-SNAPSHOT
+> 2.2.3-SNAPSHOT
 
 
 ## List of RoboPods
@@ -84,6 +112,7 @@ This is the list of currently available RoboPods. Click them to get more informa
 | [Chartboost](chartboost/)                     | Chartboost is a mobile ads network for games. |
 | [Fabric](fabric/)                             | Twitter's Mobile Development Platform |
 | [Facebook](facebook/)                         | Build, grow, and monetize your app with Facebook. The Facebook SDK allows you to natively integrate Facebook into your app. |
+| [Firebase](firebase/)                         | Firebase Analytics and Firebase Messaging bindings. |
 | [Flurry](flurry/)                             | Measure, track and analyze app performance, user acquisition and activity with Flurry Analytics. |
 | [Google Analytics](google-analytics/)         | Collect, configure, and analyze your data to reach the right audience. |
 | [Google APIs](google-apis/)                   | Google APIs is used by several Google services such as Google Analytics to configure them in a single configuration file. |
