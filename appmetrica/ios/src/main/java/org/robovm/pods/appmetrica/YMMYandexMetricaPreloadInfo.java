@@ -29,29 +29,34 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.dispatch.*;
 /*</imports>*/
 
 /*<javadoc>*/
+
 /*</javadoc>*/
-/*<annotations>*//*</annotations>*/
+/*<annotations>*/@Library(Library.INTERNAL) @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/YMMYandexMetricaPreloadInfo/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
     /*<implements>*//*</implements>*/ {
 
-    /*<ptr>*/
-    /*</ptr>*/
-    /*<bind>*/
-    /*</bind>*/
+    /*<ptr>*/public static class YMMYandexMetricaPreloadInfoPtr extends Ptr<YMMYandexMetricaPreloadInfo, YMMYandexMetricaPreloadInfoPtr> {}/*</ptr>*/
+    /*<bind>*/static { ObjCRuntime.bind(YMMYandexMetricaPreloadInfo.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
     protected YMMYandexMetricaPreloadInfo(Handle h, long handle) { super(h, handle); }
     protected YMMYandexMetricaPreloadInfo(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithTrackingIdentifier:")
+    public YMMYandexMetricaPreloadInfo(String trackingID) { super((SkipInit) null); initObject(initWithTrackingIdentifier(trackingID)); }
     /*</constructors>*/
     /*<properties>*/
     
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
-    
+    @Method(selector = "initWithTrackingIdentifier:")
+    protected native @Pointer long initWithTrackingIdentifier(String trackingID);
+    @Method(selector = "setAdditionalInfo:forKey:")
+    public native void setAdditionalInfo(String info, String key);
     /*</methods>*/
 }

@@ -29,6 +29,7 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.dispatch.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -39,7 +40,9 @@ public enum /*<name>*/YMMYandexMetricaEventErrorCode/*</name>*/ implements Value
     /*<values>*/
     InitializationError(1000L),
     InvalidName(1001L),
-    JsonSerializationError(1002L);
+    JsonSerializationError(1002L),
+    InvalidRevenueInfo(1003L),
+    EmptyUserProfile(1004L);
     /*</values>*/
 
     /*<bind>*/
